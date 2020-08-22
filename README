@@ -15,17 +15,17 @@ Download and Installation:
 Clone the chalice repository: hg clone https://bitbucket.org/sudiptac/cache-side-channel
 
 Since CHALICE is built on top of KLEE, the installation of CHALICE requires to follow the 
-step to install KLEE in the following:
+step to install KLEE in the following (note CHALICE used LLVM version 2.9, currently KLEE 
+supports newer versions of LLVM, but CHALICE has not been tested with newer versions):
 
-http://klee.github.io/build-llvm29/
+http://klee.github.io/
 
-From the aforementioned URL, you only need to change step (5) by downloading 
-the modified version of KLEE as follows: 
+From the aforementioned URL, you only need to change step of cloning KLEE by downloading 
+the modified version of KLEE from this repository: 
 
-hg clone https://sudiptac@bitbucket.org/sudiptac/cache-side-channel
+The modified version is located at "klee.zip"
 
-From steps (6)-(8), please refer to  http://klee.github.io/build-llvm29/ in order to 
-compile and run KLEE. 
+Follow other steps from  http://klee.github.io/ in order to compile and run KLEE. 
 
 
 Configuring CHALICE: 
