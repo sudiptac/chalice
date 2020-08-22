@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for i in `seq 0 15`;
+do
+	grep -inr "information leak detected in byte $i" $1 | wc -l >> access_$2
+done    

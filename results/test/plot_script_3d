@@ -1,0 +1,13 @@
+
+require(scatterplot3d)
+#my.mat <- matrix(runif(25), nrow = 5)
+#dimnames(my.mat) <- list(LETTERS[1:5], letters[11:15])
+#s3d.dat <- data.frame(columns = c(col(my.mat)),
+#rows    = c(row(my.mat)), value = c(my.mat))
+s3d.dat <- read.table("plots/aes_byte_leak_sensitivity_count.dat", header=T,sep=",")
+scatterplot3d(s3d.dat, type = "h", lwd = 5, pch = " ",
+#x.ticklabs = colnames(my.mat), y.ticklabs = rownames(my.mat),
+x.ticklabs = list("2way,8KB", "4way,8KB", "2way,16KB", "4way,16KB", "2way,32KB", "4way,32KB"), 
+y.ticklabs = list("a", "v", "g", "sa", "sv", "sg"),
+#color = grey(25:1 / 40), main = "3D barplot")
+main = "3D barplot")

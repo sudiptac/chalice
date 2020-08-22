@@ -1,0 +1,14 @@
+# set terminal svg size 600,400 dynamic enhanced fname 'arial'  fsize 10 mousing name "surface1_1" butt dashlength 1.0 
+# set output 'surface1.1.svg'
+set grid nopolar
+set grid xtics nomxtics ytics nomytics noztics nomztics \
+ nox2tics nomx2tics noy2tics nomy2tics nocbtics nomcbtics
+set grid layerdefault   lt black linewidth 0.200,  lt black linewidth 0.200
+set hidden3d back offset 1 trianglepattern 3 undefined 1 altdiagonal bentover
+set style data lines
+set title "3D surface from a grid (matrix) of Z values" 
+set xrange [ -0.500000 : 4.50000 ] noreverse nowriteback
+set yrange [ -0.500000 : 4.50000 ] noreverse nowriteback
+x = 0.0
+splot plots/aes_byte_leak_count.dat with lines notitle
+

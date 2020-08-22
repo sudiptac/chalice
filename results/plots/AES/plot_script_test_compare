@@ -1,0 +1,68 @@
+set terminal postscript color
+set output 'aes_byte_leak_count_compare.eps'
+#set size 1.2,1.0
+#set grid
+set title "Cache side-channel leak in AES (observation via miss count)"
+set ylabel "No. of impossible values/byte (inforrmation leak)"
+set xlabel "Key bytes"
+#set xrange [1:16]
+#set yrange [1:55]
+#set logscale y
+#set xtics ("" 0, "cnt" 1, "fir" 2, "fdct" 3, "expint" 4, "qurt" 5, "nsichneu" 6, "edn" 7, "ludcmp" 8, "ns" 9, "ndes" 10, "bsort100" 11, "adpcm" 12, "st" 13)
+set xtics ("1" 0, "2" 1, "3" 2, "4" 3, "5" 4, "6" 5, "7" 6, "8" 7, "9" 8, "10" 9, "11" 10, "12" 11, "13" 12, "14" 13, "15" 14, "16" 15)
+#set xtics mirror rotate by -45
+#unset xtics
+set boxwidth 0.9 relative
+set style histogram
+set style data histogram
+set style fill solid 1.0 border -1
+set border
+set key above
+#unset key
+#set style data linespoints
+
+plot 'aes_byte_leak_count_compare.dat' using 1 fs pattern 1.33 lt -1 title 'AES from basic Crypto',\
+		 '' using 2 fs solid 1.0 lt -1 title 'AES from OpenSSL'
+
+set title "Cache side-channel leak in AES, cache = 8KB, 2-way (observation via miss count)"
+set output 'aes_byte_leak_count_compare_1.eps'
+
+plot 'aes_byte_leak_count_compare.dat' using 3 fs pattern 1.33 lt -1 title 'AES from basic Crypto',\
+		 '' using 4 fs solid 1.0 lt -1 title 'AES from OpenSSL'
+
+set title "Cache side-channel leak in AES, cache = 8KB, 4-way (observation via miss count)"
+set output 'aes_byte_leak_count_compare_2.eps'
+
+plot 'aes_byte_leak_count_compare.dat' using 5 fs pattern 1.33 lt -1 title 'AES from basic Crypto',\
+		 '' using 6 fs solid 1.0 lt -1 title 'AES from OpenSSL'
+
+set title "Cache side-channel leak in AES, cache = 16KB, 2-way (observation via miss count)"
+set output 'aes_byte_leak_count_compare_3.eps'
+
+plot 'aes_byte_leak_count_compare.dat' using 7 fs pattern 1.33 lt -1 title 'AES from basic Crypto',\
+		 '' using 8 fs solid 1.0 lt -1 title 'AES from OpenSSL'
+
+set title "Cache side-channel leak in AES, cache = 16KB, 4-way (observation via miss count)"
+set output 'aes_byte_leak_count_compare_4.eps'
+
+plot 'aes_byte_leak_count_compare.dat' using 9 fs pattern 1.33 lt -1 title 'AES from basic Crypto',\
+		 '' using 10 fs solid 1.0 lt -1 title 'AES from OpenSSL'
+
+set title "Cache side-channel leak in AES, cache = 32KB, 2-way (observation via miss count)"
+set output 'aes_byte_leak_count_compare_5.eps'
+
+plot 'aes_byte_leak_count_compare.dat' using 11 fs pattern 1.33 lt -1 title 'AES from basic Crypto',\
+		 '' using 12 fs solid 1.0 lt -1 title 'AES from OpenSSL'
+
+set title "Cache side-channel leak in AES, cache = 32KB, 4-way (observation via miss count)"
+set output 'aes_byte_leak_count_compare_6.eps'
+
+plot 'aes_byte_leak_count_compare.dat' using 13 fs pattern 1.33 lt -1 title 'AES from basic Crypto',\
+		 '' using 14 fs solid 1.0 lt -1 title 'AES from OpenSSL'
+
+
+set title "Cache side-channel leak in AES (observation via hit/miss sequence length 1)"
+set output 'aes_byte_leak_seq_compare.eps'
+
+plot 'aes_byte_leak_seq_compare.dat' using 1 fs pattern 1.33 lt -1 title 'AES from basic Crypto',\
+		 '' using 3 fs solid 1.0 lt -1 title 'AES from OpenSSL'

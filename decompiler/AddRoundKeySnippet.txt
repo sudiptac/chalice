@@ -1,0 +1,39 @@
+%3 = getelementptr inbounds i8* %1, i32 3 	;change to i32 0 loads correct value
+%4 = load i8* %3   						;4001f0: lbu $3,3($5)
+
+%5 = getelementptr inbounds i8* %2, i32 -8  			;4001f8: addiu $29,$29,-8
+
+%6 = getelementptr inbounds i8* %5, i32 0
+store i8 %4, i8* %6  						;400200: sb $3, 0($29)		subkey[0] = w[0] >> 24;
+
+###################################################################################################
+
+%7 = getelementptr inbounds i8* %1, i32 2 	;change to i32 0 loads correct value
+%8 = bitcast i8* %7 to i16*
+%9 = load i16* %8   						;400208: lhu $2, 2($5)
+   
+%10 = getelementptr inbounds i8* %5, i32 1
+%11 = trunc i16 %9 to i8
+store i8 %11, i8* %10   					;400210: sb $2, 1($29)		subkey[1] = w[0] >> 16;
+
+###################################################################################################
+
+%12 = getelementptr inbounds i8* %1, i32 0
+%13 = bitcast i8* %12 to i32*
+%14 = load i32* %13   						;400218: lw $2, 0($5)
+
+%15 = lshr i32 %14, 8   					;400220: srl $2,$2,0x08
+
+%16 = getelementptr inbounds i8* %5, i32 2
+%17 = trunc i32 %15 to i8
+store i8 %17, i8* %16   					;400228: sb $2, 2($29)		subkey[2] = w[0] >> 8;
+
+###################################################################################################
+
+%18 = getelementptr inbounds i8* %1, i32 0
+%19 = bitcast i8* %18 to i32*
+%20 = load i32* %19   						;400230: lw $2, 0($5)
+
+%21 = getelementptr inbounds i8* %5, i32 3
+%22 = trunc i32 %20 to i8
+store i8 %22, i8* %21   					;400238: sb $2, 3($29)		subkey[3] = w[0];

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "256:32:1:90:x" > cache.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache.cfg  gdkkeyuni_test.bc >& log/log_test_keyuni_basic_miss_count_1way_8KB
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache.cfg  gdkkeyname_test.bc >& log/log_test_keyname_basic_miss_count_1way_8KB

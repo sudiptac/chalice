@@ -1,0 +1,42 @@
+set terminal postscript color
+set output 'plots/aes_basic_byte_leak_count_sens.eps'
+#set size 1.2,1.0
+#set grid
+set title "Cache side-channel leak in AES (basic crypto) w.r.t. cache configurations (observation via miss count)"
+set ylabel "No. of impossible values/byte (information leak)" 
+set xlabel "Key bytes"
+#set xrange [1:10]
+set yrange [1:220]
+#set logscale y
+#set xtics ("2-way, 8KB" 0, "4-way, 8KB" 1, "2-way, 16 KB" 2, "4-way, 16KB" 3, "2-way, 32 KB" 4, "4-way, 32 KB" 5)
+set xtics ("1" 0, "2" 1, "3" 2, "4" 3, "5" 4, "6" 5, "7" 6, "8" 7, "9" 8, "10" 9, "11" 10, "12" 11, "13" 12, "14" 13, "15" 14, "16" 15)
+#set xtics mirror rotate by 45
+#rotate parallel
+#unset xtics
+set boxwidth 0.9 relative
+set style histogram
+set style data histogram
+set style fill solid 1.0 border -1
+set border
+set key above
+#unset key
+#set style data linespoints
+
+plot 'plots/aes_byte_leak_sensitivity_count.dat' using 1 fs solid 0.33 lt -1 title '2-way, 8KB',\
+		  '' using 2 fs solid 1.33 lt -1 title '4-way, 8KB',\
+		  '' using 3 fs pattern 2.00 lt -1 title '2-way, 16KB',\
+		  '' using 4 fs pattern 1.33 lt -1 title '4-way, 16KB',\
+		  '' using 5 fs pattern 8.66 lt -1 title '2-way, 32 KB',\
+		  '' using 6 fs pattern 4.66 lt -1 title '4-way, 32 KB'
+
+
+set title "Cache side-channel leak in AES (OpenSSL) w.r.t. cache configurations (observation via miss count)"
+set output 'plots/aes_openssl_byte_leak_count_sens.eps'
+set yrange [1:25]
+
+plot 'plots/aes_byte_leak_sensitivity_count.dat' using 13 fs solid 0.33 lt -1 title '2-way, 8KB',\
+		  '' using 14 fs solid 1.33 lt -1 title '4-way, 8KB',\
+		  '' using 15 fs pattern 2.00 lt -1 title '2-way, 16KB',\
+		  '' using 16 fs pattern 1.33 lt -1 title '4-way, 16KB',\
+		  '' using 17 fs pattern 8.66 lt -1 title '2-way, 32 KB',\
+		  '' using 18 fs pattern 4.66 lt -1 title '4-way, 32 KB'

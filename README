@@ -1,0 +1,128 @@
+This is a working prototype of CHALICE framework. Some features of CHALICE is 
+still under active development. 
+
+README file for chalice:
+==========================
+
+CHALICE is a tool based on symbolic execution toolkit KLEE. For a given 
+cache timing observation (e.g. number of cache misses, sequence of cache 
+misses), CHALICE quantifies how much information about the program input 
+is leaked. 
+
+Download and Installation: 
+===========================
+
+Clone the chalice repository: hg clone https://bitbucket.org/sudiptac/cache-side-channel
+
+Since CHALICE is built on top of KLEE, the installation of CHALICE requires to follow the 
+step to install KLEE in the following:
+
+http://klee.github.io/build-llvm29/
+
+From the aforementioned URL, you only need to change step (5) by downloading 
+the modified version of KLEE as follows: 
+
+hg clone https://sudiptac@bitbucket.org/sudiptac/cache-side-channel
+
+From steps (6)-(8), please refer to  http://klee.github.io/build-llvm29/ in order to 
+compile and run KLEE. 
+
+
+Configuring CHALICE: 
+==========================
+
+CHALICE can be configured to be compiled into the following three modes: 
+
+M1: quantifying information leak in timing-based cache attacks for direct-mapped and LRU caches
+M2: quantifying information leak in trace-based cache attacks for direct-mapped caches
+M3: quantifying information leak in trace-based cache attacks for LRU caches
+M4: quantifying information leak in access-based attacks for direct-mapped and/or LRU caches
+
+M1 is controlled by environment _LEAK_DETECTION and _CACHE_CHECK_TIMING_LEAK 
+M2 is controlled by environment _LEAK_DETECTION and _CACHE_CHECK_SEQ_LEAK
+M3 is controlled by environment _LEAK_DETECTION and _CACHE_CHECK_SEQ_LEAK_LRU
+M4 is controlled by environment _LEAK_DETECTION and _CACHE_CHECK_ACCESS_LEAK
+
+Refer to the file "Makefile.chalice.config" in the "klee" directory to switch between different 
+modes. Specifically, replace the content of "Makefile.config" with the content from 
+"Makefile.chalice.config" that sets "CFLAGS" and "CXXFLAGS". Then, recompile KLEE. Each time the 
+mode of CHALICE is switched between M1/M2/M3/M4, KLEE needs to be recompiled to reflect the mode changes. 
+
+
+Running CHALICE: 
+==========================
+
+Run the tool as follows: 
+
+## klee --write-smt2s --cache-cfg=<cache_configuration_file> <bitcode_file_of_test_subject>
+
+We have introduced the option "--cache-cfg" within KLEE to communicate the cache 
+configuration. This option takes the cache configuration within a file and the 
+file has the following format: 
+
+-> <number of sets>:<line size>:<associativity>:<observed_cache_miss>:<replacement policy> 
+
+<line size> is in number of bytes and <observed_cache_miss> is an integer to capture the 
+number of misses observed by an attacker. <observed_cache_miss> can be obtained from 
+simulation results or it can also be modified within KLEE to get results for different 
+observations. <replacement_policy> is "l" (for LRU) or "f" (for FIFO) and this field is 
+ignored if the cache is direct-mapped. 
+
+For instance, 32:32:2:90:l captures a two-way set-associative, 2 KB cache with 32 
+bytes line size and LRU replacement policy. 
+
+Our tool currently does not handle replacement policies other than LRU or FIFO. 
+
+
+Running a test program: 
+==========================
+
+Check installation: 
+
+Go to benchmarks/test directory and run: 
+
+# klee --write-smt2s --cache-cfg=cache.cfg test_symbolic.bc
+
+This should generate all tests for a toy program "test_symbolic.bc". 
+
+
+Reporoducing the experimental results: 
+======================================
+
+We use the following subjects to evaluate CHALICE:
+
+- benchmarks/aes_basic_crypto
+- benchmarks/openssl/crypto/aes
+- benchmarks/openssl/crypto/des
+- benchmarks/openssl/crypto/rc4
+- benchmarks/openssl/crypto/rc5
+- benchmarks/gdklib (two different routines "gdkkeyuni" and "gdkkeyname")
+
+In each of the aforementioned directory, there are two scripts: 
+
+- run_DIR
+- run_LRU
+
+As the names suggest, "run_DIR" produces results for direct-mapped caches. 
+The cache configuration is set to 8KB by default and it can be changed by 
+modifying the file cache.cfg. "run_LRU" produces results for set-associative 
+LRU caches ranging from "2-way, 8KB" to "4-way, 64 KB". The same scripts 
+can be used for both timing-based attacks and trace-based attacks. Only 
+modification should be done in Makefile.config (see above on how to configure 
+it) to change the attacker model. 
+
+The results of run_DIR and run_LRU scripts are stored in the following 
+subdirectories within each subject directory, respectively: 
+
+- log, and 
+- log_LRU
+
+Note: Some of these experiments may run for *very* long. Therefore, feel free 
+to modify the scripts. 
+
+
+Contact: 
+=========
+If you face any problem in installation or running the tool, please contact 
+Sudipta Chattopadhyay (sudiptaonline@gmail.com)
+

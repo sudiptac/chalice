@@ -1,0 +1,21 @@
+#!/bin/bash
+
+grep -inr "\[++\]" $1 > scripts/leak
+while read line; do
+	access=$(echo $line | cut -f10 -d" ")
+	byte=$(echo $line | cut -f8 -d" ")
+	echo $access
+	byte=$(echo $byte | rev | cut -c 2- | rev)
+	echo $byte
+	echo $line >> temp/record_byte_leak_from_hit_sequence_${access}_${byte}
+done <scripts/leak
+grep -inr "\[--\]" $1 > scripts/leak
+while read line; do
+	access=$(echo $line | cut -f10 -d" ")
+	byte=$(echo $line | cut -f8 -d" ")
+	echo $access
+	byte=$(echo $byte | rev | cut -c 2- | rev)
+	echo $byte
+	echo $line >> temp/record_byte_leak_from_miss_sequence_${access}_${byte}
+done <scripts/leak
+

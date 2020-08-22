@@ -1,0 +1,24 @@
+set terminal postscript color
+set output 'plots/aes_byte_leak_count_sens.eps'
+#set size 1.2,1.0
+set grid
+set title "Cache side-channel leak in AES w.r.t. cache configurations (observation via miss count)"
+set ylabel "No. of possible values/byte (Average over 16 bytes)"
+#set xlabel "cache configurations"
+#set xrange [1:10]
+set yrange [1:260]
+#set logscale y
+set xtics ("2-way, 8KB" 0, "4-way, 8KB" 1, "2-way, 16 KB" 2, "4-way, 16KB" 3, "2-way, 32 KB" 4, "4-way, 32 KB" 5)
+set xtics mirror rotate by -45
+#unset xtics
+set boxwidth 0.9 relative
+set style histogram
+set style data histogram
+set style fill solid 1.0 border -1
+set border
+set key above
+unset key
+#set style data linespoints
+
+plot 'plots/aes_byte_leak_sensitivity_count.dat' using 2 fs pattern 1.33 lt -1 title '#value inferred per byte'
+#		 '' using 2 title '#value possible per byte'

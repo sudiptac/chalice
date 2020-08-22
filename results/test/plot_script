@@ -1,0 +1,3 @@
+data <- read.table("data.csv", header=T,sep=",")
+attach(data)
+plot(scale,serial)

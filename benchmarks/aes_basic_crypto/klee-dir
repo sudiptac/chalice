@@ -1,0 +1,3 @@
+#!/bin/bash
+
+klee --write-smt2s --cache-cfg=cache.cfg $1

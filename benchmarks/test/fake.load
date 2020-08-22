@@ -1,0 +1,4 @@
+func:main var:ret
+func:main var:base
+func:main var:zero
+func:main var:retval

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+klee --write-smt2s --cache-cfg=cache_lru.cfg  $1

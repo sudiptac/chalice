@@ -1,0 +1,12 @@
+#!/bin/bash
+
+grep -inr "information leak detected in byte " $1 > scripts/leak
+
+while read line; do
+	access=$(echo $line | cut -f10 -d" ")
+	byte=$(echo $line | cut -f8 -d" ")
+	echo $access
+	byte=$(echo $byte | rev | cut -c 2- | rev)
+	echo $byte
+	echo $line >> log/record_byte_leak_from_sequence_${access}_${byte}
+done <scripts/leak

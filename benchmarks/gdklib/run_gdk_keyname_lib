@@ -1,0 +1,34 @@
+#!/bin/bash
+
+echo "128:32:2:90:l" > cache_lru.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg gdkkeyname_test.bc >& log_test_generation/log_test_keyname_basic_miss_count_2way_8KB
+grep -inr "Number of (input)-independent cache misses" log_test_generation/log_test_keyname_basic_miss_count_2way_8KB | cut -f8 -d" " | sort -u >& log_test_generation/all_keyname_test
+echo "======" >>  log_test_generation/all_keyname_test
+echo "64:32:4:90:l" > cache_lru.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg gdkkeyname_test.bc >& log_test_generation/log_test_keyname_basic_miss_count_4way_8KB
+grep -inr "Number of (input)-independent cache misses" log_test_generation/log_test_keyname_basic_miss_count_4way_8KB | cut -f8 -d" " | sort -u >> log_test_generation/all_keyname_test
+echo "======" >>  log_test_generation/all_keyname_test
+echo "256:32:2:90:l" > cache_lru.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg gdkkeyname_test.bc >& log_test_generation/log_test_keyname_basic_miss_count_2way_16KB
+grep -inr "Number of (input)-independent cache misses" log_test_generation/log_test_keyname_basic_miss_count_2way_16KB | cut -f8 -d" " | sort -u >> log_test_generation/all_keyname_test
+echo "======" >>  log_test_generation/all_keyname_test
+echo "128:32:4:90:l" > cache_lru.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg gdkkeyname_test.bc >& log_test_generation/log_test_keyname_basic_miss_count_4way_16KB
+grep -inr "Number of (input)-independent cache misses" log_test_generation/log_test_keyname_basic_miss_count_4way_16KB | cut -f8 -d" " | sort -u >> log_test_generation/all_keyname_test
+echo "======" >>  log_test_generation/all_keyname_test
+echo "512:32:2:90:l" > cache_lru.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg gdkkeyname_test.bc >& log_test_generation/log_test_keyname_basic_miss_count_2way_32KB
+grep -inr "Number of (input)-independent cache misses" log_test_generation/log_test_keyname_basic_miss_count_2way_32KB | cut -f8 -d" " | sort -u >> log_test_generation/all_keyname_test
+echo "======" >>  log_test_generation/all_keyname_test
+echo "256:32:4:90:l" > cache_lru.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg gdkkeyname_test.bc >& log_test_generation/log_test_keyname_basic_miss_count_4way_32KB
+grep -inr "Number of (input)-independent cache misses" log_test_generation/log_test_keyname_basic_miss_count_4way_32KB | cut -f8 -d" " | sort -u >> log_test_generation/all_keyname_test
+echo "======" >>  log_test_generation/all_keyname_test
+echo "1024:32:2:90:l" > cache_lru.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg gdkkeyname_test.bc >& log_test_generation/log_test_keyname_basic_miss_count_2way_64KB
+grep -inr "Number of (input)-independent cache misses" log_test_generation/log_test_keyname_basic_miss_count_2way_64KB | cut -f8 -d" " | sort -u >> log_test_generation/all_keyname_test
+echo "======" >>  log_test_generation/all_keyname_test
+echo "512:32:4:90:l" > cache_lru.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg gdkkeyname_test.bc >& log_test_generation/log_test_keyname_basic_miss_count_4way_64KB
+grep -inr "Number of (input)-independent cache misses" log_test_generation/log_test_keyname_basic_miss_count_4way_64KB | cut -f8 -d" " | sort -u >> log_test_generation/all_keyname_test
+echo "======" >>  log_test_generation/all_keyname_test

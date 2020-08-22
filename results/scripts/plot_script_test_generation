@@ -1,0 +1,28 @@
+set terminal postscript color
+set output 'plots/test_sensitivity.eps'
+#set size 1.2,1.0
+#set grid
+set title "No. of generated tests for varying cache size (LRU)"
+set ylabel "#tests"
+#set xlabel "cache configurations"
+#set xrange [1:10]
+set yrange [0:55]
+#set logscale y
+set xtics ("2-way, 8KB" 0, "4-way, 8KB" 1, "2-way, 16 KB" 2, "4-way, 16KB" 3, "2-way, 32 KB" 4, "4-way, 32 KB" 5, "2-way, 64 KB" 6, "4-way, 64 KB" 7)
+set xtics mirror rotate by -45
+#unset xtics
+set boxwidth 0.9 relative
+set style histogram
+set style data histogram
+set style fill solid 1.0 border -1
+set border
+set key above
+#unset key
+set style data linespoints
+
+plot 'plots/test_generation.dat' using 1 lt -1 lw 2 ps 2 pi -1 pt 6 title 'AES from basic crypto',\
+		 '' using 2 lt -1 lw 2 pi -1 pt 7 ps 0.2 title 'AES from OpenSSL',\
+		 '' using 3 lt -1 dashtype 3 ps 2 lw 2 pi -1 pt 7 title 'DES',\
+		 '' using 4 lt -1 lw 2 ps 2 pi -1 pt 4 title 'RC4',\
+		 '' using 5 lt -1 lw 2 ps 2 pi -1 pt 5 title 'GDK'	
+		

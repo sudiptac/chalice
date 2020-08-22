@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo "256:32:1:90:l" > cache.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache.cfg --fake-load=fake.load --memory-map=memory.map gdkkeyuni_test.bc >& log_access/log_access_keyuni_basic_miss_count_1way_8KB
+echo "128:32:2:90:l" > cache_lru.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg --fake-load=fake.load --memory-map=memory.map gdkkeyuni_test.bc >& log_access/log_access_keyuni_basic_miss_count_2way_8KB
+echo "64:32:4:90:l" > cache_lru.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg --fake-load=fake.load --memory-map=memory.map gdkkeyuni_test.bc >& log_access/log_access_keyuni_basic_miss_count_4way_8KB
+echo "256:32:2:90:l" > cache_lru.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg --fake-load=fake.load --memory-map=memory.map gdkkeyuni_test.bc >& log_access/log_access_keyuni_basic_miss_count_2way_16KB
+echo "128:32:4:90:l" > cache_lru.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg --fake-load=fake.load --memory-map=memory.map gdkkeyuni_test.bc >& log_access/log_access_keyuni_basic_miss_count_4way_16KB
+echo "512:32:2:90:l" > cache_lru.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg --fake-load=fake.load --memory-map=memory.map gdkkeyuni_test.bc >& log_access/log_access_keyuni_basic_miss_count_2way_32KB
+echo "256:32:4:90:l" > cache_lru.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg --fake-load=fake.load --memory-map=memory.map gdkkeyuni_test.bc >& log_access/log_access_keyuni_basic_miss_count_4way_32KB
+#echo "1024:32:2:90:l" > cache_lru.cfg
+#/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg --fake-load=fake.load --memory-map=memory.map gdkkeyuni_test.bc >& log_access/log_access_keyuni_basic_miss_count_2way_64KB
+#echo "512:32:4:90:l" > cache_lru.cfg
+#/usr/bin/time -p klee --write-smt2s --cache-cfg=cache_lru.cfg --fake-load=fake.load --memory-map=memory.map gdkkeyuni_test.bc >& log_access/log_access_keyuni_basic_miss_count_4way_64KB

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "256:32:1:90:x" > cache.cfg
+/usr/bin/time -p klee --write-smt2s --cache-cfg=cache.cfg  aes.bc >& log/log_test_aes_basic_miss_count_1way_8KB

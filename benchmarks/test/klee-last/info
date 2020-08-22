@@ -1,0 +1,21 @@
+klee --write-smt2s --cache-cfg=cache.cfg --fake-load=fake.load --memory-map=memory.map test_symbolic.bc
+PID: 93762
+Started: 2016-09-30 01:36:56
+BEGIN searcher description
+<InterleavedSearcher> containing 2 searchers:
+RandomPathSearcher
+WeightedRandomSearcher::CoveringNew
+</InterleavedSearcher>
+END searcher description
+Finished: 2016-09-30 01:36:56
+Elapsed: 00:00:00
+KLEE: done: explored paths = 1
+KLEE: done: avg. constructs per query = 437
+KLEE: done: total queries = 15
+KLEE: done: valid queries = 5
+KLEE: done: invalid queries = 10
+KLEE: done: query cex = 15
+
+KLEE: done: total instructions = 31
+KLEE: done: completed paths = 1
+KLEE: done: generated tests = 1
