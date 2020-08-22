@@ -23,9 +23,12 @@ http://klee.github.io/
 From the aforementioned URL, you only need to change step of cloning KLEE by downloading 
 the modified version of KLEE from this repository: 
 
-The modified version is located at "klee.zip"
+The modified version is located at "klee.zip" and unzip it as follows: 
 
-Follow other steps from  http://klee.github.io/ in order to compile and run KLEE. 
+unzip klee.zip
+
+It will create the directory named klee. To compile and run KLEE, follow the other steps 
+from  http://klee.github.io/. 
 
 
 Configuring CHALICE: 
