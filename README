@@ -12,7 +12,7 @@ is leaked.
 Download and Installation: 
 ===========================
 
-Clone the chalice repository: hg clone https://bitbucket.org/sudiptac/cache-side-channel
+Clone the chalice repository: git clone https://github.com/sudiptac/chalice.git
 
 Since CHALICE is built on top of KLEE, the installation of CHALICE requires to follow the 
 step to install KLEE in the following (note CHALICE used LLVM version 2.9, currently KLEE 
